@@ -1,5 +1,6 @@
 package com.example;
 
+// Importaciones necesarias
 import java.util.Scanner;
 import com.example.gestion.*;
 import com.example.gestion.GestionConfiguracion;
@@ -11,9 +12,16 @@ import com.example.gestion.GestionTiempo;
 import com.example.gestion.GestionUsuarios;
 import javax.swing.JOptionPane;
 
+/**
+ * Clase principal que contiene el menú de la aplicación
+ */
 public class Main {
+    /**
+     * Método principal que muestra el menú y maneja la selección del usuario
+     */
     public static void main(String[] args) {
         
+        // Mostrar el menú principal usando JOptionPane
         String input = JOptionPane.showInputDialog(null, "Seleccione una opción:\n" +
                 "1. Gestión de Tareas\n" +
                 "2. Gestión de Proyectos\n" +
@@ -24,8 +32,10 @@ public class Main {
                 "7. Gestión de Configuración\n" +
                 "8. Salir");
 
+        // Convertir la entrada del usuario a entero
         int opcion = Integer.parseInt(input);
 
+        // Manejar la selección del usuario
         switch(opcion) {
             case 1:
                 GestionTareas tareas = new GestionTareas();
