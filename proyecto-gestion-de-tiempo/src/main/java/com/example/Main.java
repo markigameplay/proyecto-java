@@ -1,7 +1,6 @@
 package com.example;
 
 // Importaciones necesarias
-import java.util.Scanner;
 import com.example.gestion.*;
 import com.example.gestion.GestionConfiguracion;
 import com.example.gestion.GestionNotificaciones;
@@ -32,44 +31,60 @@ public class Main {
                 "7. Gestión de Configuración\n" +
                 "8. Salir");
 
-        // Convertir la entrada del usuario a entero
-        int opcion = Integer.parseInt(input);
+        // Verificar si la entrada es nula
+        if (input == null) {
+            JOptionPane.showMessageDialog(null, "Operación cancelada");
+            return; // Salir del método si se cancela
+        }
 
-        // Manejar la selección del usuario
-        switch(opcion) {
-            case 1:
-                GestionTareas tareas = new GestionTareas();
-                tareas.mostrarMenu();
-                break;
-            case 2:
-                GestionProyectos proyectos = new GestionProyectos();
-                proyectos.mostrarMenu();
-                break;
-            case 3:
-                GestionUsuarios usuarios = new GestionUsuarios();
-                usuarios.mostrarMenu();
-                break;
-            case 4:
-                GestionTiempo tiempo = new GestionTiempo();
-                tiempo.mostrarMenu();
-                break;
-            case 5:
-                GestionReportes reportes = new GestionReportes();
-                reportes.mostrarMenu();
-                break;
-            case 6:
-                GestionNotificaciones notificaciones = new GestionNotificaciones();
-                notificaciones.mostrarMenu();
-                break;
-            case 7:
-                GestionConfiguracion config = new GestionConfiguracion();
-                config.mostrarMenu();
-                break;
-            case 8:
-                System.out.println("¡Hasta luego!");
-                break;
-            default:
-                System.out.println("Opción no válida");
+        try {
+            // Convertir la entrada del usuario a entero
+            int opcion = Integer.parseInt(input);
+
+            // Manejar la selección del usuario
+            switch(opcion) {
+                case 1:
+                    GestionUsuarios usuarios = new GestionUsuarios();
+                    // Solicitar el nombre del usuario
+                    String nombreUsuario = JOptionPane.showInputDialog("Ingrese el nombre del usuario:");
+                    if (nombreUsuario != null && !nombreUsuario.trim().isEmpty()) {
+                        usuarios.agregarUsuario(nombreUsuario);
+                    }
+                    GestionTareas tareas = new GestionTareas(usuarios);
+                    tareas.mostrarMenuTareas();
+                    break;
+                case 2:
+                    GestionProyectos proyectos = new GestionProyectos();
+                    proyectos.mostrarMenu();
+                    break;
+                case 3:
+                    GestionUsuarios Usuarios = new GestionUsuarios();
+                    Usuarios.mostrarMenu();
+                    break;
+                case 4:
+                    GestionTiempo tiempo = new GestionTiempo();
+                    tiempo.mostrarMenu();
+                    break;
+                case 5:
+                    GestionReportes reportes = new GestionReportes();
+                    reportes.mostrarMenu();
+                    break;
+                case 6:
+                    GestionNotificaciones notificaciones = new GestionNotificaciones();
+                    notificaciones.mostrarMenu();
+                    break;
+                case 7:
+                    GestionConfiguracion config = new GestionConfiguracion();
+                    config.mostrarMenu();
+                    break;
+                case 8:
+                    JOptionPane.showMessageDialog(null, "¡Hasta luego!");
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Opción no válida");
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido");
         }
     }
 }
